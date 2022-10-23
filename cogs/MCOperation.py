@@ -9,5 +9,9 @@ class ServerOperation(commands.Cog):
     async def start(self, context):
         await context.send("start")
 
+    @commands.command()
+    async def end(self, context):
+        await context.send("end")
+
 def setup(bot):
     return bot.add_cog(ServerOperation(bot=bot))
