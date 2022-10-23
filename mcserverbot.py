@@ -1,5 +1,3 @@
-import os
-import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 load_dotenv()
@@ -17,10 +15,3 @@ class MCServerBot(commands.Bot):
         print("login")
         print("=====")
         await self.load_extension("MCOperation")
-
-# if __name__ == "__main__":
-#     intents = discord.Intents.default()
-#     intents.message_content = True
-#     server_bot = MCServerBot(command_prefix='!', intents=intents)
-
-#     server_bot.run(os.getenv("TOKEN"))

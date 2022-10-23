@@ -1,5 +1,3 @@
-import os
-import subprocess
 from server import Server
 from discord.ext import commands
 
