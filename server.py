@@ -8,7 +8,7 @@ class Server:
     
     def start(self, jar_dir_pass):
         yield "Server starting up..."
-        
+
         os.chdir(jar_dir_pass)
 
         yield "up .minecraft_server starting..."
@@ -18,7 +18,7 @@ class Server:
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE)
-        
+
         # ここのディレクトリに戻す
         os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -30,11 +30,11 @@ class Server:
             # 起動完了，コマンド自体は終了していない
             if("Done" in stdout_byte):
                 break
-        
+
         # ループを抜けた理由が無事に起動完了した
         if self.process.poll() is None:
             return "start up"
-        
+
         yield 'start up error. kill proccess'
         self.process.kill()
         for log in self.getProccessCommunicateOutErr():
