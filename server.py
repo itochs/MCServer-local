@@ -1,5 +1,6 @@
 import os
 import subprocess
+import asyncio
 
 
 class Server:
@@ -21,6 +22,7 @@ class Server:
 
         # ここのディレクトリに戻す
         os.chdir(os.path.dirname(os.path.abspath(__file__)))
+        # await asyncio.sleep(5)
 
         while self.process.poll() is None:
             stdout_byte = self.process.stdout.readline().strip("\n")
@@ -33,7 +35,8 @@ class Server:
 
         # ループを抜けた理由が無事に起動完了した
         if self.process.poll() is None:
-            return "start up"
+            yield "start up"
+            return
 
         yield 'start up error. kill proccess'
         self.process.kill()
