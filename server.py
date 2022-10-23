@@ -45,11 +45,11 @@ class Server:
         if self.process is None:
             yield "maybe server is not starting"
             return
-        
+
         if self.process.poll() is not None:
             yield "already server is stopping"
             return
-        
+
         yield "Server is stopping..."
         for log in self.getProccessCommunicateOutErr("stop", timeout=20):
             yield log
@@ -74,18 +74,18 @@ class Server:
         try:
             outs, errs = self.process.communicate(input=byte_input, timeout=timeout)
             
-            yield "output"
+            yield "output log"
             yield outs
             
-            yield "error"
-            yield errs
+            # yield "error"
+            # yield errs
         
         except subprocess.TimeoutExpired:
             self.process.kill()
             outs, errs = self.process.communicate()
 
-            yield "output"
-            yield outs
+            # yield "output"
+            # yield outs
             
-            yield "error"
+            yield "error log"
             yield errs

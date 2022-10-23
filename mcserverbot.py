@@ -16,10 +16,11 @@ class MCServerBot(commands.Bot):
         print("=====")
         print("login")
         print("=====")
-        await self.load_extension("cogs.MCOperation")
+        await self.load_extension("MCOperation")
 
-intents = discord.Intents.default()
-intents.message_content = True
-server_bot = MCServerBot(command_prefix='!', intents=intents)
+# if __name__ == "__main__":
+#     intents = discord.Intents.default()
+#     intents.message_content = True
+#     server_bot = MCServerBot(command_prefix='!', intents=intents)
 
-server_bot.run(os.getenv("TOKEN"))
+#     server_bot.run(os.getenv("TOKEN"))
