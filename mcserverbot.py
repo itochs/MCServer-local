@@ -22,8 +22,11 @@ class MCServerBot(commands.Bot):
         print("login")
         print("=====")
         await self.load_extension("MCOperation")
+        self.loop_joinlog.start()
     
-    # @tasks.loop(seconds=10)
-    # async def loop():
-        # await 
+
+    @tasks.loop(seconds=10)
+    async def loop_joinlog(self):
+        if(self.server_status == ServerStatus.waiting):
+            print(self.server.getJoinLog()) 
     
