@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 COGs = [
-    "cogs.MCOperation"
+    "MCOperation"
 ]
 
 class MCServerBot(commands.Bot):
