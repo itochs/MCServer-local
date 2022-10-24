@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 import asyncio
 
@@ -72,6 +73,20 @@ class Server:
 
             if "whitelist" in line:
                 break
+
+    def getJoinLog(self):
+        self.process.stdin.write("list\n")
+        self.process.stdin.flush()
+        return self.process.stdout.readline().strip("\n")
+    
+    def getJoinNumber(self):
+        join_log = self.getJoinLog()
+        # 2番目にログイン人数が入る
+        pattern = "(\[.*\]\s\[.*\]:\D*)(\d*)(.*)"
+        join_number = re.match(pattern, join_log).group(2)
+        return join_number
+
+
 
     def getProccessCommunicateOutErr(self, byte_input="", timeout=0):
         try:
