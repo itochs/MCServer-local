@@ -7,6 +7,8 @@ class ServerOperation(commands.Cog):
         super().__init__()
         self.bot = bot
         
+    async def changeStatus(self, ststus):
+        self.bot.server_status = ststus
 
     @commands.command()
     async def start(self, context):
@@ -14,11 +16,13 @@ class ServerOperation(commands.Cog):
             return
 
         await context.send("start")
-        self.bot.server_status = ServerStatus.starting
+        await self.changeStatus(ServerStatus.starting)
+        # self.bot.server_status = ServerStatus.starting
         for log in self.bot.server.start("../minecraft_server/server-v1.19/"):
             print(log)
         
-        self.bot.server_status = ServerStatus.waiting
+        await self.changeStatus(ServerStatus.waiting)
+        # self.bot.server_status = ServerStatus.waiting
 
 
     @commands.command()
@@ -27,11 +31,13 @@ class ServerOperation(commands.Cog):
             return
 
         await context.send("stop")
-        self.bot.server_status = ServerStatus.stopping
+        await self.changeStatus(ServerStatus.stopping)
+        # self.bot.server_status = ServerStatus.stopping
         for log in self.bot.server.stop():
             print(log)
         
-        self.bot.server_status = ServerStatus.stop
+        await self.changeStatus(ServerStatus.stop)
+        # self.bot.server_status = ServerStatus.stop
 
 
 def setup(bot):
