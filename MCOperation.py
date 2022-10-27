@@ -1,12 +1,12 @@
-# from server import Server
 from discord.ext import commands
 from serverstatus import ServerStatus
+
 
 class ServerOperation(commands.Cog):
     def __init__(self, bot) -> None:
         super().__init__()
         self.bot = bot
-        
+
     async def changeStatus(self, ststus):
         self.bot.server_status = ststus
 
@@ -20,10 +20,9 @@ class ServerOperation(commands.Cog):
         # self.bot.server_status = ServerStatus.starting
         for log in self.bot.server.start("../minecraft_server/server-v1.19/"):
             print(log)
-        
+
         await self.changeStatus(ServerStatus.waiting)
         # self.bot.server_status = ServerStatus.waiting
-
 
     @commands.command()
     async def stop(self, context):
@@ -35,7 +34,7 @@ class ServerOperation(commands.Cog):
         # self.bot.server_status = ServerStatus.stopping
         for log in self.bot.server.stop():
             print(log)
-        
+
         await self.changeStatus(ServerStatus.stop)
         # self.bot.server_status = ServerStatus.stop
 
